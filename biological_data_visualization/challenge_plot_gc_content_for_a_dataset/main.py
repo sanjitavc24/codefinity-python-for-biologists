@@ -2,7 +2,8 @@ import matplotlib.pyplot as plt
 
 def plot_gc_content(sequences):
     gc_values = [((seq.count("G") + seq.count("C")) / len(seq)) * 100 for seq in sequences]
-    labels = [f"Seq{i+1}" for i in range (len(sequences))]
+    indices = list(range(len(sequences)))
+
     
     colors = []
     for gc in gc_values: 
@@ -14,11 +15,12 @@ def plot_gc_content(sequences):
             colors.append ("#4361EE")
 
     plt.figure(figsize = (8,5))
-    bars = plt.bar (labels, gc_values, color=colors)
+    bars = plt.bar(indices, gc_values, color=colors)
     plt.xlabel("Sequence")
     plt.ylabel("GC content %")
     plt.title ("GC Content Across DNA sequences")
     plt.ylim(0,100)
+    plt.xticks(indices, [str(i) for i in indices])
     plt.show()
 sequences = [
     "ATGCGCGTA",
@@ -28,3 +30,4 @@ sequences = [
     "GCGCGCGCGC"
 ]
 plot_gc_content(sequences)
+
